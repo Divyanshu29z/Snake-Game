@@ -1,0 +1,53 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Lobster", cursive;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: url("../img/background.jpg");
+  min-height: 100vh;
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+}
+
+.header {
+  height: 5.2rem;
+  padding: 1rem 3.6rem;
+}
+
+.logo {
+  font-size: 48px;
+  font-weight: 600;
+  font-style: italic;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#board {
+  background: linear-gradient(rgb(245, 241, 4), rgb(206, 209, 26));
+  width: 85vmin;
+  height: 85vmin;
+  border: 2px solid black;
+  border-radius: 25px;
+  box-shadow: 0 2.4rem 4.8rem rgb(0 0 0 / 43%);
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  grid-template-rows: repeat(18, 1fr);
+}
+
+.head {
+  background-color: blueviolet;
+}
+
+.food {
+  background-color: red;
+}
