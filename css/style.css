@@ -36,7 +36,7 @@ body {
   background: linear-gradient(rgb(245, 241, 4), rgb(206, 209, 26));
   width: 85vmin;
   height: 85vmin;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   border-radius: 25px;
   box-shadow: 0 2.4rem 4.8rem rgb(0 0 0 / 43%);
   display: grid;
@@ -45,9 +45,13 @@ body {
 }
 
 .head {
-  background-color: blueviolet;
+  background-color: red;
 }
 
 .food {
-  background-color: red;
+  background-color: blueviolet;
+}
+
+.snake {
+  background-color: rgb(230, 48, 190);
 }
