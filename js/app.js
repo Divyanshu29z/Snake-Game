@@ -11,6 +11,8 @@ let lastPaintTime = 0;
 let snakeArray = [{ x: 6, y: 7 }];
 let food = { x: 13, y: 15 };
 let score = 0;
+// let highScoreVal = 0;
+
 
 // Main Method
 const main = (currentTime) => {
@@ -26,7 +28,24 @@ const main = (currentTime) => {
 
 // On Collision Method
 const onCollide = (snakeArray) => {
-  return false;
+  //if snake collide with itself
+  for (let i = 1; i < snakeArray.length; i++) {
+    if (
+      snakeArray[i].x === snakeArray[0].x &&
+      snakeArray[i].y === snakeArray[0].y
+    ) {
+      return true;
+    }
+  }
+  // if you bump into wall
+  if (
+    snakeArray[0].x >= 18 ||
+    snakeArray[0].x <= 0 ||
+    snakeArray[0].y >= 18 ||
+    snakeArray[0].y <= 0
+  ) {
+    return true;
+  }
 };
 
 // Execution of Game Engine
@@ -45,6 +64,11 @@ const gameEngine = () => {
   // If Snake has eaten the food => increment the score & regenerate the food.
   if (snakeArray[0].y === food.y && snakeArray[0].x === food.x) {
     foodSound.play();
+    score += 1;
+    scoreBoard.innerHTML = "Score: " + score;
+    if(score > highScoreVal) {
+      highScore.innerHTML = "MaxScore: " + score;
+    }
     snakeArray.unshift({
       x: snakeArray[0].x + inputDirection.x,
       y: snakeArray[0].y + inputDirection.y,
@@ -85,6 +109,15 @@ const gameEngine = () => {
 };
 
 // Starting point of the game
+let highScoreVal = localStorage.getItem('highScore');
+if(highScoreVal === null) {
+  highScoreVal = 0;
+  localStorage.setItem('highScore', JSON.stringify(highScoreVal));
+} else {
+  highScore.innerHTML = "MaxScore: " + highScoreVal;
+}
+
+
 window.requestAnimationFrame(main); // calling the main method
 window.addEventListener("keydown", (e) => {
   // User Interaction with keyboard buttons

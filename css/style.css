@@ -18,18 +18,38 @@ body {
 }
 
 .logo {
-  font-size: 48px;
-  font-weight: 600;
+  font-size: 56px;
+  font-weight: 500;
   font-style: italic;
   color: white;
   text-decoration: none;
   cursor: pointer;
+  letter-spacing: 0.75px;
+  font-family: 'Short Stack', cursive;
 }
 
 .section {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#scoreBoard {
+  position: absolute;
+  top: 120px;
+  right: 250px;
+  font-size: 64px;
+  font-weight: 500;
+  font-family: 'Short Stack', cursive;
+}
+
+#highScore {
+  position: absolute;
+  top: 200px;
+  right: 148px;
+  font-size: 64px;
+  font-weight: 500;
+  font-family: 'Short Stack', cursive;
 }
 
 #board {
@@ -45,13 +65,21 @@ body {
 }
 
 .head {
-  background-color: red;
+  background-color: blueviolet;
+  border: .25vmin solid white;
+  border-radius: 12px;
+  transform: scale(1.2);
+
 }
 
 .food {
-  background-color: blueviolet;
+  background-color: red;
+  border-radius: 12px;
+  
 }
 
 .snake {
   background-color: rgb(230, 48, 190);
+  border: .25vmin solid white;
+  border-radius: 12px;
 }
