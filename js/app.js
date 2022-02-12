@@ -11,8 +11,6 @@ let lastPaintTime = 0;
 let snakeArray = [{ x: 6, y: 7 }];
 let food = { x: 13, y: 15 };
 let score = 0;
-// let highScoreVal = 0;
-
 
 // Main Method
 const main = (currentTime) => {
@@ -56,25 +54,33 @@ const gameEngine = () => {
     musicSound.pause();
     inputDirection = { x: 0, y: 0 };
     alert("Game Over. Press any key to play again!");
-    snakeArray = [{ x: 13, y: 15 }];
+    // snakeArray = [{ x: 13, y: 15 }];
+    snakeArray = [{ x: 6, y: 7 }];
     musicSound.play();
     score = 0;
+    scoreBoard.innerHTML = "Score: " + score;
   }
 
   // If Snake has eaten the food => increment the score & regenerate the food.
   if (snakeArray[0].y === food.y && snakeArray[0].x === food.x) {
     foodSound.play();
     score += 1;
-    scoreBoard.innerHTML = "Score: " + score;
-    if(score > highScoreVal) {
-      highScore.innerHTML = "MaxScore: " + score;
+    if (score > highScoreVal) {
+      highScoreVal = score;
+      localStorage.setItem("highScore", JSON.stringify(highScoreVal));
+      maxScore.innerHTML = "MaxScore: " + highScoreVal;
     }
+    scoreBoard.innerHTML = "Score: " + score;
+    // Add new segment in a snake Array using unshift() - Add an element in the front side of an array
     snakeArray.unshift({
       x: snakeArray[0].x + inputDirection.x,
       y: snakeArray[0].y + inputDirection.y,
     });
+
+    // Generate random coordinates between 2 to 16 from the origin(0,0)
     let a = 2;
     let b = 16;
+    //generate integer value always (below code)
     food = {
       x: Math.round(a + (b - a) * Math.random()),
       y: Math.round(a + (b - a) * Math.random()),
@@ -109,15 +115,26 @@ const gameEngine = () => {
 };
 
 // Starting point of the game
-let highScoreVal = localStorage.getItem('highScore');
-if(highScoreVal === null) {
+
+//Transition property on the food.
+// It fires at every 2000ms.
+let foodElement = document.getElementById("food");
+setInterval(() => {
+  foodElement.style.transform = "scale(1.2)";
+  foodElement.style.transition = "transform ease-in-out";
+}, 250);
+
+// Get the max score from local storage once game is loaded.
+let highScore = localStorage.getItem("highScore");
+if (highScore === null) {
   highScoreVal = 0;
-  localStorage.setItem('highScore', JSON.stringify(highScoreVal));
+  localStorage.setItem("highScore", JSON.stringify(highScoreVal));
 } else {
-  highScore.innerHTML = "MaxScore: " + highScoreVal;
+  highScoreVal = JSON.parse(highScore);
+  maxScore.innerHTML = "MaxScore: " + highScoreVal;
 }
 
-
+// Request Animation Frame is for animation, callback function (main) fired more than 60 times in a sec.
 window.requestAnimationFrame(main); // calling the main method
 window.addEventListener("keydown", (e) => {
   // User Interaction with keyboard buttons
@@ -125,25 +142,21 @@ window.addEventListener("keydown", (e) => {
   moveSound.play(); //play sound on starting the game
   switch (e.key) {
     case "ArrowUp":
-      console.log("ArrowUp");
       inputDirection.x = 0;
       inputDirection.y = -1;
       break;
 
     case "ArrowDown":
-      console.log("ArrowDown");
       inputDirection.x = 0;
       inputDirection.y = 1;
       break;
 
     case "ArrowLeft":
-      console.log("ArrowLeft");
       inputDirection.x = -1;
       inputDirection.y = 0;
       break;
 
     case "ArrowRight":
-      console.log("ArrowRight");
       inputDirection.x = 1;
       inputDirection.y = 0;
       break;
@@ -152,3 +165,5 @@ window.addEventListener("keydown", (e) => {
       break;
   }
 });
+
+// End
